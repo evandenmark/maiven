@@ -58,6 +58,10 @@ export class UserService {
     return user ? user.auth0Id : null; 
   }
 
+  async findUserByAuth0Id(auth0Id: string): Promise<User | undefined> {
+    return await this.userRepository.findOne({ where: { auth0Id } });
+  }
+
   // Get all users
   async getAllUsers(): Promise<User[]> {
     return this.userRepository.find();

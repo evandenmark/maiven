@@ -13,12 +13,12 @@ export class Message {
   timestamp: Date;
 
   // Set up a Many-to-One relationship with the User entity for sender
-  @ManyToOne(() => User, (user) => user.sentMessages)
+  @ManyToOne(() => User, (user) => user.sentMessages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'sender_id' })
   sender: User;
 
   // Set up a Many-to-One relationship with the User entity for receiver
-  @ManyToOne(() => User, (user) => user.receivedMessages)
+  @ManyToOne(() => User, (user) => user.receivedMessages, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'receiver_id' })
-  receiver: User;s
+  receiver: User;
 }

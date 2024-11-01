@@ -172,3 +172,9 @@
 	
 	
 	
+2024-11-01 12:13:25.767 HST [63809] ERROR:  duplicate key value violates unique constraint "PK_ba01f0a3e0123651915008bc578"
+2024-11-01 12:13:25.767 HST [63809] DETAIL:  Key (id)=(1) already exists.
+2024-11-01 12:13:25.767 HST [63809] STATEMENT:  INSERT INTO "message"("content", "timestamp", "sender_id", "receiver_id") VALUES ($1, DEFAULT, $2, $3) RETURNING "id", "timestamp"
+2024-11-01 12:25:14.407 HST [64712] ERROR:  update or delete on table "user" violates foreign key constraint "FK_f4da40532b0102d51beb220f16a" on table "message"
+2024-11-01 12:25:14.407 HST [64712] DETAIL:  Key (id)=(31) is still referenced from table "message".
+2024-11-01 12:25:14.407 HST [64712] STATEMENT:  DELETE FROM "user" WHERE "id" = $1

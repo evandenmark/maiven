@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Autocomplete, Button, Paper, Stack, styled, TextField } from "@mui/material";
+import { Autocomplete, Button, Paper, Stack, styled, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
 import { User } from "../types";
 
@@ -12,27 +12,17 @@ type Message = {
     createdAt: string;
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    ...theme.applyStyles('dark', {
-        backgroundColor: '#1A2027',
-    }),
-}));
 
-const Messages = () => {
+const Messages = ({ currentUser }) => {
+
+    const { getAccessTokenSilently } = useAuth0();
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [users, setUsers] = useState<User[]>([]);
-    const [selectedUser, setSelectedUser] = useState<User>();
-    const { getAccessTokenSilently } = useAuth0();
+    const [selectedUserEmail, setSelectedUserEmail] = useState<string>();
 
     const [messageRecipient, setMessageRecipient] = useState<User>();
     const [messageBody, setMessageBody] = useState<string>("");
-
 
     useEffect(() => {
         fetchMessages();
@@ -53,8 +43,6 @@ const Messages = () => {
                     'Content-Type': 'application/json'
                 },
             });
-
-            console.log("RESPONSE: ", response)
 
             // Assuming response.data contains the messages
             setMessages(response.data.map((m) => {
@@ -86,62 +74,138 @@ const Messages = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log("RESPONSE USER:", response)
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
         }
     };
 
-    const sendMessage = () => {
-        console.log("SENDING THE MESSAGE")
+    const fetchCurrentUserByAuth0Id = async () => {
+        try {
+            const token = await getAccessTokenSilently();
+
+            const response = await axios.get(`/users/auth0/${currentUser.sub}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching user by Auth0 ID:", error);
+            throw error;
+        }
+    };
+
+    const sendMessage = async (recipient: User, message: string) => {
+        const senderUser = await fetchCurrentUserByAuth0Id();
+
+        try {
+            const token = await getAccessTokenSilently();
+            const response = await axios.post(
+                'http://localhost:3000/messages',
+                {
+                    content: message,
+                    senderId: senderUser.id,
+                    receiverId: recipient.id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            await fetchMessages()
+            return response.data; // Return the response if needed
+        } catch (error) {
+            console.error("Error creating message:", error);
+            throw error;
+        }
     }
+
+    const filteredMessages = messages.filter((x) => !selectedUserEmail || x.receiver === selectedUserEmail || x.sender === selectedUserEmail)
 
     return (
         <>
-            <h2> Messages</h2>
+            {/* Sending a message UI  */}
+            <Paper
+                elevation={1}
+                sx={{
+                    padding: 5
+                }}
+            >
+                <h2>Send Message</h2>
+                <Stack spacing={2}>
+                    <Stack direction="row" spacing={2}>
+                        <Autocomplete
+                            disablePortal
+                            options={users}
+                            getOptionLabel={o => o.email}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField {...params} label="Users" />}
+                            onChange={(e, v) => setMessageRecipient(v)}
+                        />
+                        <TextField
+                            label="Message"
+                            multiline
+                            variant="filled"
+                            onChange={(e) => setMessageBody(e.target.value)}
+                            rows={4}
+                            sx={{width: '50%'}}
+                        />
 
-            <Autocomplete
-                disablePortal
-                options={users.map(u => u.email)}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Users" />}
-                onChange={(e,v) => setSelectedUser(v)}
-            />
+                    </Stack>
+                    <Button
+                        variant="contained"
+                        sx={{ width: 50 }}
+                        onClick={() => {
+                            if (messageRecipient) {
+                                sendMessage(messageRecipient, messageBody ?? "blank message")
+                            }
+                        }}>
+                        Send
+                    </Button>
+                </Stack>
 
+            </Paper>
 
-            {messages.filter((x) => !selectedUser || x.receiver == selectedUser?.email || x.sender == selectedUser?.email)
-                .map((message) => {
-                    return (
-                        <Stack key={message.id} direction="row" spacing={2}>
-                            <Item>{message.createdAt}</Item>
-                            <Item>{message.sender}</Item>
-                            <Item>{message.receiver}</Item>
-                            <Item>{message.content}</Item>
-                        </Stack>)
+            {/* Message Searching */}
+            <Paper sx={{ padding: 5 }}>
+                <h2> Messages</h2>
+                <Autocomplete
+                    disablePortal
+                    options={users.map(u => u.email)}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => <TextField {...params} label="Users" />}
+                    onChange={(e, v) => setSelectedUserEmail(v)}
+                />
 
-                })}
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Date</TableCell>
+                                <TableCell>To: </TableCell>
+                                <TableCell>From: </TableCell>
+                                <TableCell>Message </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {filteredMessages.map((message) => (
+                                <TableRow
+                                    key={message.id}
+                                >
+                                    <TableCell>{message.createdAt}</TableCell>
+                                    <TableCell>{message.sender}</TableCell>
+                                    <TableCell>{message.receiver}</TableCell>
+                                    <TableCell>{message.content}</TableCell>
 
-
-            <h3>Send Message</h3>
-            <Autocomplete
-                disablePortal
-                options={users}
-                getOptionLabel={o => o.email}
-                sx={{ width: 300 }}
-                renderInput={(params) => <TextField {...params} label="Users" />}
-                onChange={(e, v) => setMessageRecipient(v)}
-            />
-            <TextField
-                label="Message"
-                multiline
-                variant="filled"
-                onChange={(e) => setMessageBody(e.target.value)}
-            />
-            <Button
-                onClick={() => sendMessage()}>
-                Send
-            </Button>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
         </>
     )
 

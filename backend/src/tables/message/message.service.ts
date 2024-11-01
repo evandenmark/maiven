@@ -16,7 +16,6 @@ export class MessageService {
   }
 
   async getMessagesForUser(userId: number): Promise<Message[]> {
-    console.log("GETTING USER MESSSAGE")
     return this.messageRepository.find({
       where: [{ sender: { id: userId } }, { receiver: { id: userId } }],
       relations: ['sender', 'receiver'],
@@ -25,7 +24,6 @@ export class MessageService {
   }
 
   async getAllMessages(): Promise<Message[]> {
-    console.log("HEEERREEE IN ALL MESSAGES", this.messageRepository.find())
 
     const m = await this.messageRepository.find({
       relations: ['sender', 'receiver']

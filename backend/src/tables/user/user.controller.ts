@@ -14,6 +14,13 @@ export class UserController {
     return await this.userService.findAll();
   }
 
+  //get user by auth0 id
+  @UseGuards(JwtAuthGuard)
+  @Get('auth0/:auth0Id')
+  async getUserByAuth0Id(@Param('auth0Id') auth0Id: string) {
+    return await this.userService.findUserByAuth0Id(auth0Id);
+  }
+
   // Automatically sync user data on login
   @UseGuards(JwtAuthGuard)
   @Post('sync')
