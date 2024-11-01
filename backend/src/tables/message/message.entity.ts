@@ -14,11 +14,11 @@ export class Message {
 
   // Set up a Many-to-One relationship with the User entity for sender
   @ManyToOne(() => User, (user) => user.sentMessages)
-  @JoinColumn({ name: 'sender_id' })
+  @JoinColumn({ name: 'sender_auth0_id' })
   sender: User;
 
   // Set up a Many-to-One relationship with the User entity for receiver
   @ManyToOne(() => User, (user) => user.receivedMessages)
-  @JoinColumn({ name: 'receiver_id' })
-  receiver: User;
+  @JoinColumn({ name: 'receiver_auth0_id' })
+  receiver: User;s
 }

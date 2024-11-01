@@ -4,3 +4,105 @@
 2024-10-28 09:55:41.440 HST [482] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
 2024-10-28 09:55:41.443 HST [483] LOG:  database system was shut down at 2024-10-28 09:55:04 HST
 2024-10-28 09:55:41.447 HST [482] LOG:  database system is ready to accept connections
+2024-10-30 18:05:20.286 HST [7513] FATAL:  lock file "postmaster.pid" already exists
+2024-10-30 18:05:20.286 HST [7513] HINT:  Is another postmaster (PID 482) running in data directory "/usr/local/var/postgres"?
+2024-10-30 18:05:27.352 HST [482] LOG:  received fast shutdown request
+2024-10-30 18:05:27.352 HST [482] LOG:  aborting any active transactions
+2024-10-30 18:05:27.355 HST [482] LOG:  background worker "logical replication launcher" (PID 491) exited with exit code 1
+2024-10-30 18:05:27.355 HST [484] LOG:  shutting down
+2024-10-30 18:05:27.366 HST [482] LOG:  database system is shut down
+2024-10-30 18:05:30.427 HST [7575] LOG:  starting PostgreSQL 14.13 (Homebrew) on x86_64-apple-darwin22.6.0, compiled by Apple clang version 15.0.0 (clang-1500.1.0.2.5), 64-bit
+2024-10-30 18:05:30.429 HST [7575] LOG:  listening on IPv6 address "::1", port 5432
+2024-10-30 18:05:30.429 HST [7575] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2024-10-30 18:05:30.430 HST [7575] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2024-10-30 18:05:30.438 HST [7576] LOG:  database system was shut down at 2024-10-30 18:05:27 HST
+2024-10-30 18:05:30.443 HST [7575] LOG:  database system is ready to accept connections
+2024-10-30 18:06:52.364 HST [7638] ERROR:  relation "users" does not exist at character 15
+2024-10-30 18:06:52.364 HST [7638] STATEMENT:  select * from users;
+2024-10-30 19:28:03.804 HST [28041] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-30 19:28:03.804 HST [28041] DETAIL:  Failing row contains (1, null, null, null, null).
+2024-10-30 19:28:03.804 HST [28041] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-30 19:28:19.355 HST [28114] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-30 19:28:19.355 HST [28114] DETAIL:  Failing row contains (2, null, null, null, null).
+2024-10-30 19:28:19.355 HST [28114] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-30 20:32:28.116 HST [32704] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-30 20:32:28.116 HST [32704] DETAIL:  Failing row contains (3, null, null, null, null).
+2024-10-30 20:32:28.116 HST [32704] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-30 20:32:42.148 HST [32712] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-30 20:32:42.148 HST [32712] DETAIL:  Failing row contains (4, null, null, null, null).
+2024-10-30 20:32:42.148 HST [32712] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:10:00.992 HST [84211] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:10:00.992 HST [84211] DETAIL:  Failing row contains (5, null, null, null, null).
+2024-10-31 18:10:00.992 HST [84211] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:11:58.882 HST [84421] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:11:58.882 HST [84421] DETAIL:  Failing row contains (6, null, null, null, null).
+2024-10-31 18:11:58.882 HST [84421] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:12:48.489 HST [84471] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:12:48.489 HST [84471] DETAIL:  Failing row contains (7, null, null, null, null).
+2024-10-31 18:12:48.489 HST [84471] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:13:24.900 HST [84565] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:13:24.900 HST [84565] DETAIL:  Failing row contains (8, null, null, null, null).
+2024-10-31 18:13:24.900 HST [84565] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:16:45.196 HST [85764] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:16:45.196 HST [85764] DETAIL:  Failing row contains (9, null, null, null, null).
+2024-10-31 18:16:45.196 HST [85764] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:17:51.142 HST [85901] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:17:51.142 HST [85901] DETAIL:  Failing row contains (10, null, null, null, null).
+2024-10-31 18:17:51.142 HST [85901] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:18:22.685 HST [85964] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:18:22.685 HST [85964] DETAIL:  Failing row contains (11, null, null, null, null).
+2024-10-31 18:18:22.685 HST [85964] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:24:41.620 HST [86447] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:24:41.620 HST [86447] DETAIL:  Failing row contains (12, null, null, null, null).
+2024-10-31 18:24:41.620 HST [86447] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:28:42.288 HST [86763] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:28:42.288 HST [86763] DETAIL:  Failing row contains (13, null, null, null, null).
+2024-10-31 18:28:42.288 HST [86763] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:29:44.337 HST [86869] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:29:44.337 HST [86869] DETAIL:  Failing row contains (14, null, null, null, null).
+2024-10-31 18:29:44.337 HST [86869] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, DEFAULT, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:30:54.700 HST [87051] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:30:54.700 HST [87051] DETAIL:  Failing row contains (15, null, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:30:54.700 HST [87051] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:33:27.641 HST [87287] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:33:27.641 HST [87287] DETAIL:  Failing row contains (16, null, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:33:27.641 HST [87287] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:34:33.356 HST [87411] ERROR:  null value in column "auth0Id" of relation "user" violates not-null constraint
+2024-10-31 18:34:33.356 HST [87411] DETAIL:  Failing row contains (17, null, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:34:33.356 HST [87411] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES (DEFAULT, $1, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:37:37.393 HST [87682] ERROR:  null value in column "firstname" of relation "user" violates not-null constraint
+2024-10-31 18:37:37.393 HST [87682] DETAIL:  Failing row contains (18, google-oauth2|116783472213839781030, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:37:37.393 HST [87682] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES ($1, $2, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:38:20.866 HST [87774] ERROR:  null value in column "firstname" of relation "user" violates not-null constraint
+2024-10-31 18:38:20.866 HST [87774] DETAIL:  Failing row contains (19, google-oauth2|116783472213839781030, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:38:20.866 HST [87774] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES ($1, $2, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:42:05.678 HST [88193] ERROR:  null value in column "firstname" of relation "user" violates not-null constraint
+2024-10-31 18:42:05.678 HST [88193] DETAIL:  Failing row contains (20, google-oauth2|116783472213839781030, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:42:05.678 HST [88193] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES ($1, $2, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:43:29.764 HST [88306] ERROR:  null value in column "firstname" of relation "user" violates not-null constraint
+2024-10-31 18:43:29.764 HST [88306] DETAIL:  Failing row contains (21, google-oauth2|116783472213839781030, evanlewisdenmark@gmail.com, null, null).
+2024-10-31 18:43:29.764 HST [88306] STATEMENT:  INSERT INTO "user"("auth0Id", "email", "firstname", "lastname") VALUES ($1, $2, DEFAULT, DEFAULT) RETURNING "id"
+2024-10-31 18:56:17.044 HST [89565] ERROR:  syntax error at or near "*" at character 8
+2024-10-31 18:56:17.044 HST [89565] STATEMENT:  delete * from user;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+2024-10-31 18:56:21.947 HST [89565] ERROR:  syntax error at or near "user" at character 13
+2024-10-31 18:56:21.947 HST [89565] STATEMENT:  delete from user;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
