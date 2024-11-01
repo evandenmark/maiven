@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Query } from '@nestjs/common';
 import { MessageService } from './message.service';
 
 @Controller('messages')
@@ -14,8 +14,13 @@ export class MessageController {
     return this.messageService.createMessage(content, senderId, receiverId);
   }
 
-  @Get('user/:userId')
-  async getMessagesForUser(@Param('userId') userId: number) {
-    return this.messageService.getMessagesForUser(userId);
+  // Get messages for all users or a specific user
+  @Get()
+  async getMessages(@Query('userId') userId?: number) {
+    if (userId) {
+      return this.messageService.getMessagesForUser(userId);
+    } else {
+      return this.messageService.getAllMessages();
+    }
   }
 }

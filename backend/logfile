@@ -106,3 +106,69 @@
 	
 	
 	
+2024-10-31 21:43:02.197 HST [4321] ERROR:  column "ehllo world" does not exist at character 94
+2024-10-31 21:43:02.197 HST [4321] STATEMENT:  insert into message (id, content, timestamp, sender_auth0_id, receiver_auth0_id) 
+	values (1, "ehllo world", "10-31-2024", 234, 435) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+2024-10-31 21:43:21.348 HST [4321] ERROR:  insert or update on table "message" violates foreign key constraint "FK_fe42a847fa67c980b3b65dedc01"
+2024-10-31 21:43:21.348 HST [4321] DETAIL:  Key (sender_auth0_id)=(234) is not present in table "user".
+2024-10-31 21:43:21.348 HST [4321] STATEMENT:  insert into message (id, content, timestamp, sender_auth0_id, receiver_auth0_id) 
+	values (1, 'ehllo world', '10-31-2024', 234, 435) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+2024-10-31 21:44:02.282 HST [4396] ERROR:  insert or update on table "message" violates foreign key constraint "FK_fe42a847fa67c980b3b65dedc01"
+2024-10-31 21:44:02.282 HST [4396] DETAIL:  Key (sender_auth0_id)=(234) is not present in table "user".
+2024-10-31 21:44:02.282 HST [4396] STATEMENT:  insert into message (id, content, sender_auth0_id, receiver_auth0_id) 
+	values (1, 'ehllo world', 234, 435) 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+2024-10-31 22:38:04.022 HST [9074] ERROR:  syntax error at or near "value" at character 59
+2024-10-31 22:38:04.022 HST [9074] STATEMENT:  insert into message (id, content, sender_id, receiver_id) value (3, 'evan was here', 30, 31)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+2024-10-31 22:39:19.374 HST [9161] ERROR:  syntax error at or near "value" at character 60
+2024-10-31 22:39:19.374 HST [9161] STATEMENT:  insert into message (id, content, sender_id, receiver_id) 
+	value (3, 'evan was here', 30, 31)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

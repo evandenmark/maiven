@@ -26,13 +26,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Users = () => {
     const [users, setUsers] = useState<User[]>([]);
-    const [newUser, setNewUser] = useState({ email: "", name: "" });
     const { getAccessTokenSilently } = useAuth0();
 
-
     useEffect(() => {
-
-
         fetchUsers();
     }, [getAccessTokenSilently]);
 
@@ -46,6 +42,7 @@ const Users = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            console.log("RESPONSE USER:", response)
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -69,6 +66,11 @@ const Users = () => {
         }
     };
 
+    //get a users messages
+    const getUserMessages = async (userId: number) => {
+
+    }
+
     return (
         <div>
             <h2>Users</h2>
@@ -80,10 +82,17 @@ const Users = () => {
                         <Item>{user.email}</Item>
                         <Item>
                             <Button
+                            onClick={() => getUserMessages(user.id)}>
+                                See Messages
+                            </Button>
+                        </Item>
+                        <Item>
+                            <Button
                             onClick={() => deleteUser(user.id)}>
                                 DELETE USER
                             </Button>
                         </Item>
+                        
                     </Stack>
 
                 ))}

@@ -7,7 +7,7 @@ import Messages from "./components/Messages";
 import axios from 'axios';
 
 function App() {
-  const { loginWithRedirect, logout, isAuthenticated, user , getAccessTokenSilently} = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const syncUser = async () => {
@@ -34,7 +34,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-100">
         <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Fullstack User Management</h1>
+          <h1 className="text-2xl font-bold">Maiven User Management</h1>
           {isAuthenticated ? (
             <div>
               <span className="mr-4">Welcome, {user?.name}</span>
@@ -61,7 +61,7 @@ function App() {
             <div className="flex-grow p-8">
               <Routes>
                 <Route path="/users" element={<Users />} />
-                {/* <Route path="/messages" element={<Messages />} /> */}
+                <Route path="/messages" element={<Messages />} />
               </Routes>
             </div>
           </div>
