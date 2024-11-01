@@ -51,7 +51,7 @@ function App() {
                 <span className="mr-4">Welcome, {user?.name}</span>
                 <Button
                   variant="contained"
-                  onClick={() => logout({ returnTo: window.location.origin })}
+                  onClick={() => logout()}
                 >
                   Log out
                 </Button>

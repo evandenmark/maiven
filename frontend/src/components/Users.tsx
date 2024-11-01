@@ -66,7 +66,7 @@ const Users = () => {
     };
 
     return (
-        <div>
+        <Paper sx={{padding: 5}} elevation={0}>
             <h2>Users</h2>
 
             <TableContainer component={Paper}>
@@ -90,7 +90,9 @@ const Users = () => {
                                 <TableCell align="right">{user.email}</TableCell>
                                 <TableCell align="right">
                                     <Button
-                                        onClick={() => deleteUser(user.id)}>
+                                        variant="contained"
+                                        onClick={() => deleteUser(user.id)}
+                                        sx={{ background: "red" }}>
                                         DELETE USER
                                     </Button>
                                 </TableCell>
@@ -99,8 +101,8 @@ const Users = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            
-        </div>
+
+        </Paper>
     );
 
 };
