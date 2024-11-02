@@ -7,7 +7,7 @@ This project is a user management system built with **NestJS** for the backend, 
 ## Features
 
 - User registration and login via auth0
-- delete users via the User page
+- view and delete users via the User page
 - view messages of any user (sent or received)
 - send a message via a post request
 
@@ -22,9 +22,10 @@ This project is a user management system built with **NestJS** for the backend, 
 There are 2 database tables: user and message. 
 
 User contains basic information - email, name, and auth0id. 
+
 Message contains the fields timestamp, senderId, receiverId, and content. 
 
-NOTE: because we use auth0 for authenication, I had the option to not create a user table, but I decided to because it made api requests easier. However, this means I had to keep the user table synced with auth0. 
+NOTE: because I used auth0 for authenication, I had the option to not create a local postgres user table (auth0 handles basic user management), but I decided to because it made api requests easier and (if this was real life) we would probably have other user fields, which would require us to have a postgres user table in addition to auth0's management. However, this means I had to keep the user table synced with auth0. 
 
 ## Installation
 
