@@ -8,7 +8,7 @@ export class UserController {
   constructor(private readonly userService: UserService) { }
 
   // Get all users
-  @UseGuards(JwtAuthGuard) // Protect this route with JWT auth
+  @UseGuards(JwtAuthGuard) 
   @Get()
   async getUsers() {
     return await this.userService.findAll();
@@ -21,7 +21,9 @@ export class UserController {
     return await this.userService.findUserByAuth0Id(auth0Id);
   }
 
-  // Automatically sync user data on login
+  // Automatically sync user data with Auth0 on login
+  // This is probably the most imporant request. When called, it checks that all users in Auth0
+  // exist in our local db
   @UseGuards(JwtAuthGuard)
   @Post('sync')
   async syncUser(@Req() req) {
@@ -31,8 +33,8 @@ export class UserController {
 
   // Delete user data associated with the Auth0 ID
   @UseGuards(JwtAuthGuard)
-  @Delete(':userId') // Change 'me' to ':userId' to accept a user ID as a parameter
-  async deleteUser(@Param('userId') userId: number) { // Accept userId as a parameter
+  @Delete(':userId') 
+  async deleteUser(@Param('userId') userId: number) { 
     await this.userService.deleteUser(userId, );
     return { message: `User with ID ${userId} deleted successfully` };
   }
@@ -43,7 +45,7 @@ export class UserController {
   async getMe(@Req() req) {
 
     const { auth0Id, email, name } = req.user;
-    await this.userService.findOrCreateUser(auth0Id, email, name); // Optional: Ensure sync on each request
+    await this.userService.findOrCreateUser(auth0Id, email, name); 
     return { auth0Id, email, name };
   }
 

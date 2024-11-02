@@ -15,6 +15,7 @@ export class MessageService {
     return this.messageRepository.save(message);
   }
 
+  // the backend functions for getting messages for a specific user
   async getMessagesForUser(userId: number): Promise<Message[]> {
     return this.messageRepository.find({
       where: [{ sender: { id: userId } }, { receiver: { id: userId } }],
@@ -23,12 +24,12 @@ export class MessageService {
     });
   }
 
+  // or all users
   async getAllMessages(): Promise<Message[]> {
 
     const m = await this.messageRepository.find({
       relations: ['sender', 'receiver']
     });
-    console.log(m)
     return m
     // return this.messageRepository.find();
   }

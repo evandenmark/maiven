@@ -26,6 +26,22 @@ Message contains the fields timestamp, senderId, receiverId, and content.
 
 NOTE: because I used auth0 for authenication, I had the option to not create a local postgres user table (auth0 handles basic user management), but I decided to because it made api requests easier and (if this was real life) we would probably have other user fields, which would require us to have a postgres user table in addition to auth0's management. However, this means I had to keep the user table synced with auth0. 
 
+
+## Requirements
+I hit all of the minimum requirements for this project:
+
+Endpoints
+- POST /register
+- GET /users - get a list of users
+- POST /users - create a user in the database
+- DELETE /users/:userId - delete a user from the database
+- GET /users/:userId/messages - get messages involving a given user
+(sent/received)
+- POST /users/:userId/messages - create a new message for the given user
+
+I also implemented auth0, which allows for JWT tokens. 
+
+
 ## Installation
 
 To set up the project locally, follow these steps:

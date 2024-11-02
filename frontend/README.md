@@ -1,8 +1,15 @@
-# React + Vite
+## Frontend Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The organization of the frontend is fairly straightforward. 
 
-Currently, two official plugins are available:
+`App.jsx` is the top level component. Within it, it calls `Menu`, which calls `Users` and `Messages`. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+App
+|
+Menu
+|     \
+Users   Messages
+
+Fetching the users and its callback function happens at the top level and flows down into the bottom 3 components. Message fetching only happens within the `Message` component. 
+
+The bottom 3 components are only shown when `isAuthenticated` is confirmed by Auth0. 
