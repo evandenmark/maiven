@@ -1,4 +1,3 @@
-# maiven
 
 # Maiven User Management System
 
