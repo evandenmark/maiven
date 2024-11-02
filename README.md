@@ -51,8 +51,7 @@ To set up the project locally, follow these steps:
 1. Clone the repository:
    ```
    bash
-   git clone https://github.com/yourusername/repo-name.git
-   cd repo-name/backend
+   git clone https://github.com/evandenmark/maiven.git
    ```
 
 2. Set up your env
