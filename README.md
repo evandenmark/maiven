@@ -54,7 +54,13 @@ To set up the project locally, follow these steps:
    git clone https://github.com/evandenmark/maiven.git
    ```
 
-2. Set up your env
+2. Check out the master branch (all the code lives there)
+
+```
+git checkout master
+```
+
+3. Set up your env
 ```
 DATABASE_URL=your_database_url
 AUTH0_DOMAIN=your_auth0_domain
@@ -62,12 +68,12 @@ AUTH0_CLIENT_ID=your_auth0_client_id
 AUTH0_CLIENT_SECRET=your_auth0_client_secret
 ```
 
-3. run a db migration
+4. run a db migration
    ```
    npm run migration:run
    ```
 
-4. Run the backend server
+5. Run the backend server
    ```
    npm run start:dev
    ```
