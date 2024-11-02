@@ -6,37 +6,10 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
-type User = {
-    id: number;
-    auth0Id: string;
-    email: string;
-    name: string;
-};
 
-const Users = () => {
-    const [users, setUsers] = useState<User[]>([]);
+const Users = ({users, fetchUserCallback: fetchUsers}) => {
+    
     const { getAccessTokenSilently } = useAuth0();
-
-    useEffect(() => {
-        fetchUsers();
-    }, [getAccessTokenSilently]);
-
-    // get all users
-    const fetchUsers = async () => {
-        try {
-            // Get token
-            const token = await getAccessTokenSilently();
-            // Make request with token in Authorization header
-            const response = await axios.get("/users", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setUsers(response.data);
-        } catch (error) {
-            console.error("Error fetching users:", error);
-        }
-    };
 
     // Delete a user
     const deleteUser = async (userId: number) => {

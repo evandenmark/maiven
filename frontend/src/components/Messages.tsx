@@ -13,13 +13,12 @@ type Message = {
 };
 
 
-const Messages = ({ currentUser }) => {
+const Messages = ({ currentUser , users, fetchUserCallback}) => {
 
     const { getAccessTokenSilently } = useAuth0();
 
     // state used for displaying messages of users
     const [messages, setMessages] = useState<Message[]>([]);
-    const [users, setUsers] = useState<User[]>([]);
     const [selectedUserEmail, setSelectedUserEmail] = useState<string>();
 
     // state used for message sending
@@ -66,24 +65,8 @@ const Messages = ({ currentUser }) => {
     };
 
     useEffect(() => {
-        fetchUsers();
+        fetchUserCallback();
     }, [getAccessTokenSilently]);
-
-    const fetchUsers = async () => {
-        try {
-            // Get token
-            const token = await getAccessTokenSilently();
-            // Make request with token in Authorization header
-            const response = await axios.get("/users", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setUsers(response.data);
-        } catch (error) {
-            console.error("Error fetching users:", error);
-        }
-    };
 
     // there are users on Auth0 and users on our local db
     // they SHOULD be constantly synced
