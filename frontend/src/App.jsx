@@ -9,8 +9,10 @@ import { alignProperty } from '@mui/material/styles/cssUtils';
 import Menu from './components/Menu';
 
 function App() {
+  //gather necessary components from auth0
   const { loginWithRedirect, logout, isAuthenticated, user, getAccessTokenSilently } = useAuth0();
 
+  //when a user logs in, sync all of the auth0 users with the local db
   useEffect(() => {
     const syncUser = async () => {
       if (isAuthenticated) {
@@ -33,51 +35,45 @@ function App() {
 
 
   return (
-    <Router>
-      <div>
-        <header>
+    <>
+    {/* Login and logout screen logic */}
+      <Stack sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        spacing: 2,
+      }}>
+        <h1>Maiven User Management</h1>
+
+        {isAuthenticated ? (
+          <>
           <Stack sx={{
             alignItems: "center",
             justifyContent: "center",
-            spacing: 2,
-          }}>
-            <h1>Maiven User Management</h1>
-            {isAuthenticated ? (
-              <Stack sx={{
-                alignItems: "center",
-                justifyContent: "center",
-                spacing: 5,
-              }} >
-                <span className="mr-4">Welcome, {user?.name}</span>
-                <Button
-                  variant="contained"
-                  onClick={() => logout()}
-                >
-                  Log out
-                </Button>
-              </Stack>
-            ) : (
-              <Button
-                variant="contained"
-                onClick={() => loginWithRedirect()}
-              >
-                Log in
-              </Button>
-            )}
+            spacing: 5,
+          }} >
+            <span>Welcome, {user?.name}</span>
+            <Button
+              variant="contained"
+              onClick={() => logout()}
+            >
+              Log out
+            </Button>
           </Stack>
-        </header>
-
-        {isAuthenticated && (
-          <>
-            <Menu currentUser={user}/>
-            <Routes>
-              <Route path="/users" element={<Users />} />
-              <Route path="/messages" element={<Messages currentUser={user} />} />
-            </Routes>
           </>
+        ) : (
+          <Button
+            variant="contained"
+            onClick={() => loginWithRedirect()}
+          >
+            Log in
+          </Button>
         )}
-      </div>
-    </Router>
+      </Stack>
+
+      {/* when the user is authenicated, show the main application
+      i.e. the menu toggle, which brings up Users and Messages */}
+      {isAuthenticated && (<Menu currentUser={user} />)}
+    </>
   );
 }
 export default App;

@@ -13,17 +13,6 @@ type User = {
     name: string;
 };
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    ...theme.applyStyles('dark', {
-        backgroundColor: '#1A2027',
-    }),
-}));
-
 const Users = () => {
     const [users, setUsers] = useState<User[]>([]);
     const { getAccessTokenSilently } = useAuth0();
@@ -32,6 +21,7 @@ const Users = () => {
         fetchUsers();
     }, [getAccessTokenSilently]);
 
+    // get all users
     const fetchUsers = async () => {
         try {
             // Get token
@@ -69,6 +59,7 @@ const Users = () => {
         <Paper sx={{padding: 5}} elevation={0}>
             <h2>Users</h2>
 
+            {/* a table that contains all users in the system and displays name, email, and a delete button */}
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
@@ -82,7 +73,6 @@ const Users = () => {
                         {users.map((user) => (
                             <TableRow
                                 key={user.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
                                     {user.name}

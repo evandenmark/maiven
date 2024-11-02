@@ -17,17 +17,22 @@ const Messages = ({ currentUser }) => {
 
     const { getAccessTokenSilently } = useAuth0();
 
+    // state used for displaying messages of users
     const [messages, setMessages] = useState<Message[]>([]);
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUserEmail, setSelectedUserEmail] = useState<string>();
 
+    // state used for message sending
     const [messageRecipient, setMessageRecipient] = useState<User>();
     const [messageBody, setMessageBody] = useState<string>("");
 
+    // get messages after any login change
     useEffect(() => {
         fetchMessages();
     }, [getAccessTokenSilently])
 
+    // get messages from db
+    // if no user is provided, get all messages
     const fetchMessages = async (userId?) => {
         try {
             // Get token
@@ -44,7 +49,7 @@ const Messages = ({ currentUser }) => {
                 },
             });
 
-            // Assuming response.data contains the messages
+            // set the local state for messages to display in table 
             setMessages(response.data.map((m) => {
                 return {
                     id: m.id,
@@ -80,6 +85,9 @@ const Messages = ({ currentUser }) => {
         }
     };
 
+    // there are users on Auth0 and users on our local db
+    // they SHOULD be constantly synced
+    // here, in order to properly set the message, we need to get the local id of an auth0 user
     const fetchCurrentUserByAuth0Id = async () => {
         try {
             const token = await getAccessTokenSilently();
@@ -97,6 +105,7 @@ const Messages = ({ currentUser }) => {
         }
     };
 
+    // post request to put a message in the db
     const sendMessage = async (recipient: User, message: string) => {
         const senderUser = await fetchCurrentUserByAuth0Id();
 
@@ -123,6 +132,7 @@ const Messages = ({ currentUser }) => {
         }
     }
 
+    // we only want to view messages of users we select OR if no user is selected, show all
     const filteredMessages = messages.filter((x) => !selectedUserEmail || x.receiver === selectedUserEmail || x.sender === selectedUserEmail)
 
     return (
