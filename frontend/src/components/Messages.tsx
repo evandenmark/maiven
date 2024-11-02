@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Autocomplete, Button, Paper, Stack, styled, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { useAuth0 } from "@auth0/auth0-react";
-import { User } from "../types";
 
 type Message = {
     id: number;
