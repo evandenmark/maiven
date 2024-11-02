@@ -70,6 +70,7 @@ AUTH0_CLIENT_SECRET=your_auth0_client_secret
 
 4. run a db migration
    ```
+   npm install
    npm run migration:run
    ```
 
